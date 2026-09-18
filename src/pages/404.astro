@@ -1,0 +1,12 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+Astro.response.status = 404;
+---
+
+<BaseLayout title="页面不存在">
+	<section class="page-intro">
+		<h1>404</h1>
+		<p>你访问的页面不存在。<a href="/">返回首页</a></p>
+	</section>
+</BaseLayout>

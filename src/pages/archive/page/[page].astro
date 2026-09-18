@@ -1,0 +1,49 @@
+---
+import { siteConfig } from "@/config";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import PostList from "@components/PostList.astro";
+import Pagination from "@components/Pagination.astro";
+import { getSortedPosts } from "@utils/posts";
+import { paginate, pageSlice } from "@utils/pagination";
+
+const posts = await getSortedPosts();
+
+const raw = Astro.params.page ?? "";
+const page = /^\d+$/.test(raw) ? Number(raw) : Number.NaN;
+const pagination = paginate(posts.length, siteConfig.postsPerPage, page);
+
+// 页码非法或超出范围时显式返回 404（不用 rewrite，避免状态码不生效）
+const notFound =
+	!Number.isInteger(page) || page < 1 || page > pagination.totalPages;
+
+if (notFound) {
+	Astro.response.status = 404;
+}
+
+const current = notFound ? [] : pageSlice(posts, siteConfig.postsPerPage, page);
+---
+
+<BaseLayout
+	title={notFound ? "页面不存在" : `归档 第 ${page} 页`}
+	description="全部文章归档"
+>
+	{
+		notFound ? (
+			<section class="page-intro">
+				<h1>404</h1>
+				<p>没有这一页。<a href="/archive/">返回归档首页</a></p>
+			</section>
+		) : (
+			<>
+				<section class="page-intro">
+					<h1>归档</h1>
+					<p>共 {pagination.totalItems} 篇文章</p>
+				</section>
+
+				<PostList posts={current} variant="compact" />
+
+				<Pagination current={pagination.page} total={pagination.totalPages} />
+			</>
+		)
+	}
+</BaseLayout>

@@ -1,0 +1,50 @@
+---
+import PostCard from "@components/PostCard.astro";
+import type { Post } from "@utils/posts";
+import { postUrl } from "@utils/urls";
+
+interface Props {
+	posts: Post[];
+	/** 归档页用紧凑列表，首页用卡片 */
+	variant?: "cards" | "compact";
+}
+
+const { posts, variant = "cards" } = Astro.props;
+
+/** 按年份分组 */
+const byYear = new Map<number, Post[]>();
+for (const post of posts) {
+	const year = post.data.published.getFullYear();
+	const list = byYear.get(year) ?? [];
+	list.push(post);
+	byYear.set(year, list);
+}
+
+const years = [...byYear.keys()].sort((a, b) => b - a);
+---
+
+{
+	variant === "cards" ? (
+		<ul class="post-list">
+			{posts.map((post) => (
+				<PostCard post={post} />
+			))}
+		</ul>
+	) : (
+		years.map((year) => (
+			<>
+				<h2 class="archive-year">{year}</h2>
+				<ul class="archive-list">
+					{byYear.get(year)?.map((post) => (
+						<li>
+							<time datetime={post.data.published.toISOString()}>
+								{post.data.published.toISOString().slice(5, 10)}
+							</time>
+							<a href={postUrl(post.id)}>{post.data.title}</a>
+						</li>
+					))}
+				</ul>
+			</>
+		))
+	)
+}

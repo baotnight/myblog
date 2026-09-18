@@ -1,0 +1,20 @@
+# 统一换行符，避免 Windows 提交、Linux 部署时出现整文件 diff
+* text=auto eol=lf
+
+# 二进制文件不做换行转换
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.avif binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.otf binary
+*.mp3 binary
+*.wav binary
+
+# 锁文件在合并时不显示 diff，减少噪音
+pnpm-lock.yaml merge=binary -diff

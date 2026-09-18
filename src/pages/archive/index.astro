@@ -1,0 +1,29 @@
+---
+import { siteConfig } from "@/config";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import PostList from "@components/PostList.astro";
+import Pagination from "@components/Pagination.astro";
+import { getSortedPosts } from "@utils/posts";
+import { paginate, pageSlice } from "@utils/pagination";
+
+const posts = await getSortedPosts();
+const pagination = paginate(posts.length, siteConfig.postsPerPage, 1);
+const current = pageSlice(posts, siteConfig.postsPerPage, 1);
+---
+
+<BaseLayout title="归档" description="全部文章归档">
+	<section class="page-intro">
+		<h1>归档</h1>
+		<p>共 {pagination.totalItems} 篇文章</p>
+	</section>
+
+	{
+		posts.length > 0 ? (
+			<PostList posts={current} variant="compact" />
+		) : (
+			<p class="empty">还没有文章。</p>
+		)
+	}
+
+	<Pagination current={pagination.page} total={pagination.totalPages} />
+</BaseLayout>

@@ -1,0 +1,41 @@
+---
+import { siteConfig } from "@/config";
+
+const pathname = Astro.url.pathname;
+
+/** 判断导航项是否为当前页面（首页需精确匹配） */
+function isCurrent(href: string): boolean {
+	if (href === "/") return pathname === "/";
+	return pathname.startsWith(href.replace(/\/$/, ""));
+}
+---
+
+<nav class="nav">
+	{
+		siteConfig.nav.map((item) => (
+			<a
+				href={item.href}
+				aria-current={isCurrent(item.href) ? "page" : undefined}
+			>
+				{item.text}
+			</a>
+		))
+	}
+	<button id="theme-toggle" class="theme-toggle" type="button" aria-label="切换主题" title="切换主题">
+		<span aria-hidden="true">◐</span>
+	</button>
+</nav>
+
+<script>
+	const btn = document.getElementById("theme-toggle");
+	btn?.addEventListener("click", () => {
+		const root = document.documentElement;
+		const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+		root.setAttribute("data-theme", next);
+		try {
+			localStorage.setItem("theme", next);
+		} catch {
+			/* 忽略隐私模式下的写入失败 */
+		}
+	});
+</script>

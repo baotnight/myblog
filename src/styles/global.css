@@ -1,0 +1,398 @@
+/* ============================================================
+   全局样式：CSS 变量 + 亮/暗主题
+   ============================================================ */
+
+:root {
+	--bg: #ffffff;
+	--bg-soft: #f6f7f9;
+	--text: #1f2328;
+	--text-soft: #59636e;
+	--border: #d8dee4;
+	--accent: #316ff6;
+	--accent-soft: #e8efff;
+	--code-bg: #f6f8fa;
+	--radius: 10px;
+	--max-width: 820px;
+	--font-sans:
+		system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+		"PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+	--font-mono:
+		ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+}
+
+:root[data-theme="dark"] {
+	--bg: #0d1117;
+	--bg-soft: #161b22;
+	--text: #e6edf3;
+	--text-soft: #9198a1;
+	--border: #30363d;
+	--accent: #6e9bff;
+	--accent-soft: #1b2536;
+	--code-bg: #161b22;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	-webkit-text-size-adjust: 100%;
+}
+
+body {
+	margin: 0;
+	background: var(--bg);
+	color: var(--text);
+	font-family: var(--font-sans);
+	font-size: 16px;
+	line-height: 1.75;
+	-webkit-font-smoothing: antialiased;
+}
+
+a {
+	color: var(--accent);
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+hr {
+	border: none;
+	border-top: 1px solid var(--border);
+	margin: 2rem 0;
+}
+
+/* ---------- 布局 ---------- */
+
+.container {
+	width: 100%;
+	max-width: var(--max-width);
+	margin: 0 auto;
+	padding: 0 1.25rem;
+}
+
+.site-header {
+	border-bottom: 1px solid var(--border);
+	background: var(--bg);
+	position: sticky;
+	top: 0;
+	z-index: 10;
+}
+
+.site-header .inner {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	min-height: 60px;
+	flex-wrap: wrap;
+}
+
+.brand {
+	font-size: 1.15rem;
+	font-weight: 700;
+	color: var(--text);
+}
+
+.brand:hover {
+	text-decoration: none;
+	color: var(--accent);
+}
+
+.nav {
+	display: flex;
+	align-items: center;
+	gap: 1.25rem;
+	flex-wrap: wrap;
+}
+
+.nav a {
+	color: var(--text-soft);
+	font-size: 0.95rem;
+}
+
+.nav a:hover,
+.nav a[aria-current="page"] {
+	color: var(--accent);
+	text-decoration: none;
+}
+
+main {
+	padding: 2.5rem 0 4rem;
+	min-height: 50vh;
+}
+
+.site-footer {
+	border-top: 1px solid var(--border);
+	color: var(--text-soft);
+	font-size: 0.9rem;
+	padding: 1.5rem 0;
+}
+
+.site-footer .inner {
+	display: flex;
+	justify-content: space-between;
+	gap: 1rem;
+	flex-wrap: wrap;
+}
+
+.site-footer a {
+	color: var(--text-soft);
+}
+
+/* ---------- 主题切换 ---------- */
+
+.theme-toggle {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 34px;
+	height: 34px;
+	border: 1px solid var(--border);
+	border-radius: 50%;
+	background: var(--bg-soft);
+	color: var(--text);
+	cursor: pointer;
+	font-size: 1rem;
+	line-height: 1;
+	padding: 0;
+}
+
+.theme-toggle:hover {
+	border-color: var(--accent);
+	color: var(--accent);
+}
+
+/* ---------- 首页 ---------- */
+
+.page-intro {
+	margin-bottom: 2.5rem;
+}
+
+.page-intro h1 {
+	font-size: 1.9rem;
+	margin: 0 0 0.5rem;
+	line-height: 1.3;
+}
+
+.page-intro p {
+	margin: 0;
+	color: var(--text-soft);
+}
+
+.section-title {
+	font-size: 1.1rem;
+	margin: 0 0 1.25rem;
+	padding-bottom: 0.5rem;
+	border-bottom: 1px solid var(--border);
+}
+
+/* ---------- 文章卡片 ---------- */
+
+.post-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+}
+
+.post-card {
+	border: 1px solid var(--border);
+	border-radius: var(--radius);
+	padding: 1.25rem 1.35rem;
+	background: var(--bg-soft);
+	transition:
+		border-color 0.15s ease,
+		transform 0.15s ease;
+}
+
+.post-card:hover {
+	border-color: var(--accent);
+	transform: translateY(-2px);
+}
+
+.post-card h2,
+.post-card h3 {
+	margin: 0 0 0.4rem;
+	font-size: 1.2rem;
+	line-height: 1.4;
+}
+
+.post-card h2 a,
+.post-card h3 a {
+	color: var(--text);
+}
+
+.post-card h2 a:hover,
+.post-card h3 a:hover {
+	color: var(--accent);
+	text-decoration: none;
+}
+
+.post-meta {
+	color: var(--text-soft);
+	font-size: 0.85rem;
+	display: flex;
+	gap: 0.75rem;
+	flex-wrap: wrap;
+	align-items: center;
+}
+
+.post-card .desc {
+	margin: 0.5rem 0 0;
+	color: var(--text-soft);
+	font-size: 0.95rem;
+}
+
+.tag {
+	display: inline-block;
+	font-size: 0.78rem;
+	padding: 0.1rem 0.5rem;
+	border-radius: 999px;
+	background: var(--accent-soft);
+	color: var(--accent);
+}
+
+.empty {
+	color: var(--text-soft);
+	border: 1px dashed var(--border);
+	border-radius: var(--radius);
+	padding: 2rem;
+	text-align: center;
+}
+
+/* ---------- 文章详情 ---------- */
+
+.post-header {
+	margin-bottom: 2rem;
+	padding-bottom: 1.25rem;
+	border-bottom: 1px solid var(--border);
+}
+
+.post-header h1 {
+	font-size: 2rem;
+	margin: 0 0 0.75rem;
+	line-height: 1.3;
+}
+
+.prose > *:first-child {
+	margin-top: 0;
+}
+
+.prose h2 {
+	font-size: 1.4rem;
+	margin: 2rem 0 0.75rem;
+	padding-bottom: 0.3rem;
+	border-bottom: 1px solid var(--border);
+}
+
+.prose h3 {
+	font-size: 1.15rem;
+	margin: 1.75rem 0 0.6rem;
+}
+
+.prose blockquote {
+	margin: 1.25rem 0;
+	padding: 0.25rem 1rem;
+	border-left: 3px solid var(--accent);
+	background: var(--bg-soft);
+	color: var(--text-soft);
+}
+
+.prose code {
+	font-family: var(--font-mono);
+	font-size: 0.88em;
+	background: var(--code-bg);
+	border: 1px solid var(--border);
+	border-radius: 5px;
+	padding: 0.1rem 0.35rem;
+}
+
+.prose pre {
+	background: var(--code-bg) !important;
+	border: 1px solid var(--border);
+	border-radius: var(--radius);
+	padding: 1rem;
+	overflow-x: auto;
+}
+
+.prose pre code {
+	background: none;
+	border: none;
+	padding: 0;
+	font-size: 0.86rem;
+}
+
+.prose table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 1.25rem 0;
+	font-size: 0.92rem;
+}
+
+.prose th,
+.prose td {
+	border: 1px solid var(--border);
+	padding: 0.5rem 0.75rem;
+	text-align: left;
+}
+
+.prose th {
+	background: var(--bg-soft);
+}
+
+/* ---------- 归档 ---------- */
+
+.archive-year {
+	font-size: 1.25rem;
+	margin: 2rem 0 0.75rem;
+	color: var(--text-soft);
+}
+
+.archive-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.archive-list li {
+	display: flex;
+	gap: 1rem;
+	align-items: baseline;
+	padding: 0.4rem 0;
+	border-bottom: 1px solid var(--border);
+}
+
+.archive-list time {
+	color: var(--text-soft);
+	font-size: 0.85rem;
+	font-variant-numeric: tabular-nums;
+	flex-shrink: 0;
+}
+
+/* ---------- 上下篇 ---------- */
+
+.post-nav {
+	display: flex;
+	justify-content: space-between;
+	gap: 1rem;
+	margin-top: 3rem;
+	padding-top: 1.5rem;
+	border-top: 1px solid var(--border);
+	font-size: 0.92rem;
+}
+
+.post-nav a {
+	max-width: 48%;
+}

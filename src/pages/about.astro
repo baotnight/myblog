@@ -1,0 +1,26 @@
+---
+import { render, getEntry } from "astro:content";
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+// 关于页正文来自 src/content/spec/about.md
+const entry = await getEntry("spec", "about");
+const { Content } = entry ? await render(entry) : { Content: null };
+---
+
+<BaseLayout title="关于" description="关于本站">
+	<section class="page-intro">
+		<h1>{entry?.data.title ?? "关于"}</h1>
+	</section>
+
+	{
+		Content ? (
+			<div class="prose">
+				<Content />
+			</div>
+		) : (
+			<p class="empty">
+				还没有关于页内容。新建 src/content/spec/about.md 即可。
+			</p>
+		)
+	}
+</BaseLayout>

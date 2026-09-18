@@ -1,0 +1,10 @@
+# 允许这些依赖在安装时执行构建脚本（pnpm 10+ 默认阻止）
+# 参见 https://pnpm.io/settings
+allowBuilds:
+  esbuild: true
+  sharp: true
+
+# astro check 依赖 TypeScript 的 programmatic API，
+# 而 TypeScript 7（原生编译器）尚未提供该 API，因此统一锁定到 6.x。
+overrides:
+  typescript: ~6.0.3

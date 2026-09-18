@@ -1,0 +1,33 @@
+---
+import type { Post } from "@utils/posts";
+import { formatDate, toISODate } from "@utils/date";
+import { postUrl } from "@utils/urls";
+
+interface Props {
+	post: Post;
+}
+
+const { post } = Astro.props;
+const { title, published, description, tags, category, draft } = post.data;
+---
+
+<li class="post-card">
+	<h2>
+		<a href={postUrl(post.id)}>{title}</a>
+	</h2>
+	<div class="post-meta">
+		<time datetime={toISODate(published)}>{formatDate(published)}</time>
+		{category && <span>· {category}</span>}
+		{draft && <span class="tag">草稿</span>}
+	</div>
+	{description && <p class="desc">{description}</p>}
+	{
+		tags.length > 0 && (
+			<div class="post-meta" style="margin-top:0.6rem">
+				{tags.map((tag: string) => (
+					<span class="tag">#{tag}</span>
+				))}
+			</div>
+		)
+	}
+</li>

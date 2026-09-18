@@ -1,0 +1,39 @@
+---
+import { render, getEntry } from "astro:content";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import PostLayout from "@layouts/PostLayout.astro";
+import { getAdjacentPosts, getSortedPosts } from "@utils/posts";
+
+const { id } = Astro.params;
+
+const post = id ? await getEntry("posts", id) : undefined;
+
+// 草稿在生产环境不可访问
+if (!post || (import.meta.env.PROD && post.data.draft)) {
+	Astro.response.status = 404;
+}
+
+const { Content } = post ? await render(post) : { Content: null };
+
+const sorted = await getSortedPosts();
+const { prev, next } = post
+	? getAdjacentPosts(sorted, post.id)
+	: { prev: undefined, next: undefined };
+---
+
+{
+	post && Content ? (
+		<BaseLayout title={post.data.title} description={post.data.description}>
+			<PostLayout post={post} prev={prev} next={next}>
+				<Content />
+			</PostLayout>
+		</BaseLayout>
+	) : (
+		<BaseLayout title="文章不存在">
+			<section class="page-intro">
+				<h1>404</h1>
+				<p>找不到这篇文章。<a href="/">返回首页</a></p>
+			</section>
+		</BaseLayout>
+	)
+}

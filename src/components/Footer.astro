@@ -1,0 +1,21 @@
+---
+import { siteConfig } from "@/config";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+	<div class="container inner">
+		<span>© {year} {siteConfig.author ?? siteConfig.title}</span>
+		<span>
+			{
+				siteConfig.footer.map((item, index) => (
+					<>
+						{index > 0 && " · "}
+						<a href={item.href}>{item.text}</a>
+					</>
+				))
+			}
+		</span>
+	</div>
+</footer>

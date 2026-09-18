@@ -1,0 +1,64 @@
+---
+import { siteConfig } from "@/config";
+import NavBar from "@components/NavBar.astro";
+import Footer from "@components/Footer.astro";
+import "@/styles/global.css";
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const { title, description = siteConfig.description } = Astro.props;
+
+const pageTitle = title ? `${title} | ${siteConfig.title}` : siteConfig.title;
+
+// 用于生成 canonical 绝对地址
+const canonical = new URL(Astro.url.pathname, Astro.site ?? siteConfig.siteUrl);
+---
+
+<!doctype html>
+<html lang={siteConfig.lang}>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{pageTitle}</title>
+		<meta name="description" content={description} />
+		<link rel="canonical" href={canonical} />
+
+		<!-- 站点图标：替换 public/favicon.svg 即可 -->
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+		<!-- 在渲染前确定主题，避免刷新时闪白 -->
+		<script is:inline>
+			(() => {
+				try {
+					const saved = localStorage.getItem("theme");
+					const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+					const theme = saved === "dark" || saved === "light" ? saved : prefersDark ? "dark" : "light";
+					document.documentElement.setAttribute("data-theme", theme);
+				} catch {
+					document.documentElement.setAttribute("data-theme", "light");
+				}
+			})();
+		</script>
+	</head>
+
+	<body>
+		<header class="site-header">
+			<div class="container inner">
+				<a class="brand" href="/">{siteConfig.title}</a>
+				<NavBar />
+			</div>
+		</header>
+
+		<main>
+			<div class="container">
+				<slot />
+			</div>
+		</main>
+
+		<Footer />
+	</body>
+</html>

@@ -1,0 +1,34 @@
+---
+import { archiveUrl } from "@utils/urls";
+
+interface Props {
+	current: number;
+	total: number;
+}
+
+const { current, total } = Astro.props;
+---
+
+{
+	total > 1 && (
+		<nav class="post-nav" aria-label="分页">
+			<span>
+				{current > 1 ? (
+					<a href={archiveUrl(current - 1)}>← 上一页</a>
+				) : (
+					<span style="color:var(--text-soft)">← 上一页</span>
+				)}
+			</span>
+			<span style="color:var(--text-soft)">
+				第 {current} / {total} 页
+			</span>
+			<span>
+				{current < total ? (
+					<a href={archiveUrl(current + 1)}>下一页 →</a>
+				) : (
+					<span style="color:var(--text-soft)">下一页 →</span>
+				)}
+			</span>
+		</nav>
+	)
+}
