@@ -7,9 +7,9 @@ description: 关于本站与作者
 
 ## 关于我
 
-- 昵称：Your Name
+- 昵称：060147
 - 兴趣：待填写
-- 邮箱：you@example.com
+- 邮箱：待填写
 
 ## 关于本站
 

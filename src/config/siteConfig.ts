@@ -4,22 +4,22 @@
  */
 export const siteConfig = {
 	/** 站点标题，显示在导航栏与浏览器标签页 */
-	title: "My Blog",
+	title: "060147 的博客",
 
 	/** 站点副标题 / 简介，显示在首页 */
-	subtitle: "一个基于 Astro 的个人博客",
+	subtitle: "记录与分享",
 
 	/** 站点描述，用于 SEO 与 RSS */
-	description: "使用 Astro 构建的个人博客，支持服务端渲染，可扩展后端接口。",
+	description: "060147 的个人博客，记录与分享技术、学习与生活。",
 
 	/** 站点最终访问地址（末尾不要带斜杠），用于生成绝对链接 */
-	siteUrl: "https://example.com",
+	siteUrl: "https://060147.xyz",
 
 	/** 默认语言 */
 	lang: "zh-CN",
 
 	/** 作者名 */
-	author: "Your Name",
+	author: "060147",
 
 	/** 每页显示的文章数量 */
 	postsPerPage: 10,
@@ -34,7 +34,7 @@ export const siteConfig = {
 	/** 页脚链接 */
 	footer: [
 		{ text: "RSS", href: "/rss.xml" },
-		{ text: "GitHub", href: "https://github.com/" },
+		{ text: "GitHub", href: "https://github.com/baotnight" },
 	],
 } as const;
 
