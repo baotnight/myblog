@@ -3,19 +3,21 @@ title: 关于
 description: 关于本站与作者
 ---
 
-这里是「关于」页面，正文来自 `src/content/spec/about.md`。
-
 ## 关于我
 
 - 昵称：060147
-- 兴趣：待填写
-- 邮箱：待填写
+- 兴趣：编码
+- 邮箱：zshrj180647@163.com
 
 ## 关于本站
 
+这里记录我在编码过程中的笔记、踩过的坑和一些想法。
+
 本站使用 [Astro](https://astro.build/) 构建，采用服务端渲染（SSR），
-可以随时扩展后端接口。
+由 Node 服务实时渲染页面，可以随时扩展后端接口。
 
-写作使用 Markdown，所有文章存放在 `src/content/posts/` 目录下。
+写作使用 Markdown，文章存放在 `src/content/posts/` 目录下。
 
-如需修改本页内容，直接编辑这个文件即可。
+## 联系我
+
+有问题或想交流，欢迎发邮件到 [zshrj180647@163.com](mailto:zshrj180647@163.com)。

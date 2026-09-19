@@ -1,4 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="060147">
   <rect width="64" height="64" rx="14" fill="#316ff6"/>
-  <path d="M20 44V20h9.6c6 0 9.9 3.3 9.9 8.6 0 3.6-1.8 6.2-4.9 7.4L40 44h-5.4l-4.5-7h-5.1v7H20zm5-11.4h4.3c3.1 0 5-1.6 5-4.1s-1.9-4-5-4H25v8.1z" fill="#fff"/>
+  <text x="30" y="45" text-anchor="middle"
+        font-family="'DejaVu Sans','Liberation Sans','Helvetica Neue',Arial,sans-serif"
+        font-size="34" font-weight="700" fill="#ffffff">06</text>
+  <circle cx="47" cy="45" r="3.4" fill="#8ab0ff"/>
 </svg>
